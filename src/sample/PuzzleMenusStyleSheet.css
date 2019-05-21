@@ -1,0 +1,43 @@
+.background{
+    -fx-background-color: linear-gradient(rgb(124, 0, 113), rgba(0, 0, 0, 0.99));;
+    -fx-font-family: "Futura";
+    -fx-border-width: 3;
+}
+
+.Text{
+    -fx-font-family: "Futura";
+    -fx-background-color: rgba(0, 0, 0, 0);
+    -fx-text-fill: #ffffff;
+}
+
+.Button{
+    -fx-background-color: rgba(0, 0, 0, 0);
+    -fx-font-family: "Futura";
+    -fx-text-fill: #ffffff;
+    -fx-border-width: 1;
+    -fx-border-color: #1d1d1d;
+}
+
+.Button:hover{
+    -fx-background-color: rgb(89, 89, 89);
+    -fx-font-family: "Futura";
+    -fx-text-fill: #ffffff;
+    -fx-border-width: 1;
+    -fx-border-color: #1d1d1d;
+}
+
+.Button:pressed{
+    -fx-background-color: rgb(122, 122, 122);
+    -fx-font-family: "Futura";
+    -fx-text-fill: #ffffff;
+    -fx-border-width: 3;
+    -fx-border-color: #1d1d1d;
+}
+
+.TextField{
+    -fx-background-color: rgba(0, 0, 0, 0);
+    -fx-font-family: "Futura";
+    -fx-text-fill: #ffffff;
+    -fx-border-width: 1;
+    -fx-border-color: #1d1d1d;
+}
