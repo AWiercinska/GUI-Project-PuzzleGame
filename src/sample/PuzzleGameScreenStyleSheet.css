@@ -8,3 +8,8 @@
     -fx-border-width: 1;
     -fx-border-color: #1d1d1d;
 }
+
+.GridPane{
+    -fx-border-width: 3;
+    -fx-border-color: #a60083;
+}
