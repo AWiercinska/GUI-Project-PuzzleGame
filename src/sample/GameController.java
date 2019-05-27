@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 
 import javax.imageio.ImageIO;
@@ -11,20 +12,18 @@ import java.io.IOException;
 
 public class GameController {
 
-    //Parent root;
     int difficultyLevel;
     private BufferedImage puzzleImg;
 
     @FXML GridPane puzzleGrid;
+    @FXML Button resetGameButton;
 
-    void setValues(BufferedImage image, int difficultyLevel){
+    void setController(BufferedImage image, int difficultyLevel){
         this.puzzleImg=image;
         this.difficultyLevel=difficultyLevel;
     }
 
-    void prepareBoard(){
-        cutImage();
-    }
+
     void cutImage(){
         int index = 0;
 

@@ -29,7 +29,6 @@ public class MenuController {
     public MenuController(){
         difficultyLevel = 0;
         imageToCut = null;
-
     }
 
     @FXML public Button startGame;
@@ -45,8 +44,7 @@ public class MenuController {
     public void openSelection(){
 
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("PuzzleSelect.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PuzzleSelect.fxml"));
                 fxmlLoader.setController(this);
                 Scene scene = new Scene(fxmlLoader.load(), 600, 400);
                 stage.setTitle("Select Puzzle");
@@ -84,17 +82,18 @@ public class MenuController {
         });
     }
 
+    //After the user has chosen the Image an difficulty
+    //the game is initialized. It opens in another Window
     @FXML
     public void setInitializeGame(){
         if(difficultyLevel != 0 && imageToCut != null) {
             GameController gc = new GameController();
+            gc.setController(imageToCut,difficultyLevel);
             try {
-                gc.setValues(imageToCut,difficultyLevel);
                 fxmlLoader = new FXMLLoader(getClass().getResource("PuzzleGameScreen.fxml"));
-                Parent newRoot = fxmlLoader.load();
-                Scene scene = new Scene(newRoot, 600, 400);
+                fxmlLoader.setController(gc);
+                Scene scene = new Scene(fxmlLoader.load(), 600, 400);
                 stage.setScene(scene);
-                gc.prepareBoard();
             } catch (IOException e) {
                 e.printStackTrace();
             }

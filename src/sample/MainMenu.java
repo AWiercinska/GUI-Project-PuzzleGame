@@ -15,7 +15,7 @@ public class MainMenu extends Application {
 
         MenuController controller = fxmlLoader.getController();
 
-        primaryStage.setTitle(" Welcome to PuzzlePics");
+        primaryStage.setTitle("Welcome to PuzzlePics");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.setResizable(false);
         primaryStage.show();

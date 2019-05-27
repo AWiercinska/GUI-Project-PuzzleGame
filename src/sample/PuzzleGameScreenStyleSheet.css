@@ -13,3 +13,9 @@
     -fx-border-width: 3;
     -fx-border-color: #a60083;
 }
+
+.TextField{
+    -fx-font-family: "Futura";
+    -fx-background-color: rgba(0, 0, 0, 0);
+    -fx-text-fill: #ffffff;
+}
