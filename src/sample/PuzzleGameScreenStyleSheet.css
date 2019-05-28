@@ -4,9 +4,14 @@
     -fx-border-width: 3;
 }
 
-.Button:hover{
-    -fx-border-width: 1;
+#puzzleButton:hover{
+    -fx-border-width: 0;
     -fx-border-color: #1d1d1d;
+}
+
+#puzzleButton{
+    -fx-border-width: 0;
+    -fx-border-color: rgba(29, 29, 29, 0);
 }
 
 .GridPane{

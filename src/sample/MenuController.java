@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -94,6 +95,7 @@ public class MenuController {
                 fxmlLoader.setController(gc);
                 Scene scene = new Scene(fxmlLoader.load(), 600, 400);
                 stage.setScene(scene);
+                gc.prepareBoard();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -107,6 +109,14 @@ public class MenuController {
     @FXML
     void difficultyValueSet(){
         difficultyLevel= Integer.parseInt(difficultySetField.getText());
+        if(difficultyLevel >=7){
+            Alert faultyDifficultyAlert = new Alert(Alert.AlertType.ERROR);
+            faultyDifficultyAlert.setTitle("Selected level is too high");
+            faultyDifficultyAlert.setContentText("Please enter a level between 2 and 6");
+            faultyDifficultyAlert.show();
+            difficultyLevel = 2;
+            return;
+        }
         System.out.println(difficultyLevel);
     }
 
