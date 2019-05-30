@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -27,17 +28,18 @@ public class MenuController {
     BufferedImage imageToCut;
     int difficultyLevel;
 
-    public MenuController(){
-        difficultyLevel = 0;
-        imageToCut = null;
-    }
 
+    //@FXML private Text title;
     @FXML public Button startGame;
     @FXML public Button exitGame;
     @FXML public Button getImageButton;
     @FXML public ImageView selectedImageDisplay= null;
     @FXML public TextField difficultySetField;
-    @FXML public Button initializeGame;
+
+    public MenuController(){
+        difficultyLevel = 0;
+        imageToCut = null;
+    }
 
     //when the "Start game" button is clicked the window
     //is switched to the "PuzzleSelect" view

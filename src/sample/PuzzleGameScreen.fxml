@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@PuzzleGameScreenStyleSheet.css" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="resetGameButton" layoutX="428.0" layoutY="331.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="107.0" styleClass="Button" stylesheets="@PuzzleMenusStyleSheet.css" text="Reset" />
+      <Button fx:id="resetGameButton" onMouseClicked="#resetBoard" layoutX="428.0" layoutY="331.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="107.0" styleClass="Button" stylesheets="@PuzzleMenusStyleSheet.css" text="Reset" />
       <GridPane fx:id="puzzleGrid" layoutX="30.0" layoutY="27.0" prefHeight="332.0" prefWidth="332.0" styleClass="GridPane" stylesheets="@PuzzleGameScreenStyleSheet.css">
       </GridPane>
       <Button layoutX="428.0" layoutY="301.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="107.0" styleClass="Button" stylesheets="@PuzzleMenusStyleSheet.css" text="Menu" />

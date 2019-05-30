@@ -7,11 +7,13 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
             minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0"
             xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1"
-            stylesheets="@PuzzleGameScreenStyleSheet.css">
+            stylesheets="@PuzzleGameScreenStyleSheet.css"
+            styleClass="ImageView">
    <children>
-      <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="200.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true"
+      <ImageView fx:id="imageView" onMouseClicked="#puzzleClicked" fitHeight="200.0" fitWidth="200.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true"
                  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
-                  styleClass="ImageView"/>
+                 styleClass="ImageView"
+      />
    </children>
 </AnchorPane>
