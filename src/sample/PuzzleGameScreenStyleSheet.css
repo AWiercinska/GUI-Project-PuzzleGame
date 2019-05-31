@@ -4,7 +4,30 @@
     -fx-border-width: 3;
 }
 
-.Button:hover{
+.GridPane{
+    -fx-border-width: 3;
+    -fx-border-color: #a60083;
+}
+
+.ImageView{
     -fx-border-width: 1;
-    -fx-border-color: #1d1d1d;
+    -fx-border-color: #a60083;
+}
+
+.ImageView:hover{
+    opacity: 0.75;
+    -fx-border-radius: 5;
+    -fx-border-color: #a60083;
+}
+
+.ImageView:pressed{
+    opacity: 0.5;
+    -fx-border-radius: 5;
+    -fx-border-color: #a60083;
+}
+
+.TextField{
+    -fx-font-family: "Futura";
+    -fx-background-color: rgba(0, 0, 0, 0);
+    -fx-text-fill: #ffffff;
 }
