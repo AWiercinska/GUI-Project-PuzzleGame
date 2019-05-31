@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -12,6 +13,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
+import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -23,33 +25,35 @@ import java.util.ArrayList;
 public class GameController {
 
     private int gridSize;
-    ArrayList <Integer> imagesIndexes;
+    private ArrayList <Integer> imagesIndexes;
     private BufferedImage puzzleImg;
+
+    //arrays:
+    //board which contains current info on puzzles on the grid
     private Puzzle [][] currentBoard;
+    //two arrays holding the starting indexes and images for the puzzles
     private int [][] startingIndexes;
     private Image [][] startingImages;
-    private int [][] winningGrid;
+
+    //for switching the scene to menu
+    Stage stage;
+    MenuController menuController;
 
     @FXML GridPane puzzleGrid;
+    @FXML Button goToMenu;
     @FXML public Button resetGameButton;
 
-    void setController(BufferedImage image, int difficultyLevel){
+    void setController(BufferedImage image, int difficultyLevel, Stage stage, MenuController mc){
+        this.stage = stage;
+        this.menuController = mc;
         this.puzzleImg=image;
         this.gridSize=difficultyLevel;
         imagesIndexes = new ArrayList<>();
 
-        winningGrid = new int[difficultyLevel][difficultyLevel];
         currentBoard = new Puzzle[difficultyLevel][difficultyLevel];
         startingIndexes = new int[difficultyLevel][difficultyLevel];
         startingImages = new Image[difficultyLevel][difficultyLevel];
 
-        int tmpImageIndex = 0;
-        for(int i =0; i < gridSize; i++){
-            for(int j =0 ; j< gridSize ;j++){
-                winningGrid[i][j] = tmpImageIndex;
-                tmpImageIndex++;
-            }
-        }
     }
 
     //prepares the board for the game
@@ -182,6 +186,7 @@ public class GameController {
             }
         }
 
+        //alert is shown when the game is won
         if(isWon){
             ImageView winImage = new ImageView();
             winImage.setImage(new Image("file:"+ new File(
@@ -210,6 +215,17 @@ public class GameController {
 
                 currentBoard[row][col].setImage();
             }
+        }
+    }
+
+    @FXML void setGoToMenu(){
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PuzzleSelect.fxml"));
+        fxmlLoader.setController(menuController);
+        try {
+            Scene scene = new Scene(fxmlLoader.load(),600,400);
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

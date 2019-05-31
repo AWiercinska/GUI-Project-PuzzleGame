@@ -91,7 +91,7 @@ public class MenuController {
     public void setInitializeGame(){
         if(difficultyLevel != 0 && imageToCut != null) {
             GameController gc = new GameController();
-            gc.setController(imageToCut,difficultyLevel);
+            gc.setController(imageToCut,difficultyLevel, stage, this);
             try {
                 fxmlLoader = new FXMLLoader(getClass().getResource("PuzzleGameScreen.fxml"));
                 fxmlLoader.setController(gc);

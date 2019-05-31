@@ -18,7 +18,7 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fill="WHITE" layoutX="180.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="TYPE IN A NUMBER FROM 2 UP">
+      <Text fill="WHITE" layoutX="170.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="Text" text="TYPE IN A NUMBER FROM 2 TO 6">
          <font>
             <Font size="15.0" />
          </font>
