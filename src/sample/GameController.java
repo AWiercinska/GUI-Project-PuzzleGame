@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
@@ -7,6 +8,7 @@ import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
@@ -27,6 +29,7 @@ public class GameController {
     private int gridSize;
     private ArrayList <Integer> imagesIndexes;
     private BufferedImage puzzleImg;
+    private boolean gameStarted, gameWon;
 
     //arrays:
     //board which contains current info on puzzles on the grid
@@ -39,6 +42,8 @@ public class GameController {
     Stage stage;
     MenuController menuController;
 
+
+    @FXML Label timer;
     @FXML GridPane puzzleGrid;
     @FXML Button goToMenu;
     @FXML public Button resetGameButton;
@@ -54,6 +59,8 @@ public class GameController {
         startingIndexes = new int[difficultyLevel][difficultyLevel];
         startingImages = new Image[difficultyLevel][difficultyLevel];
 
+        gameStarted = false;
+        gameWon = false;
     }
 
     //prepares the board for the game
@@ -113,7 +120,7 @@ public class GameController {
                         false,true);
                 //if this is the last puzzle to be added the image is set to null
                 if(imagesIndexes.size() == 0) puzzleImage = null;
-                Puzzle newPuzzle = new Puzzle(puzzleImage,col,row,puzzleWidth,index,this);
+                Puzzle newPuzzle = new Puzzle(puzzleImage,col,row,puzzleWidth,index,this, gameWon);
 
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Puzzle.fxml"));
                 fxmlLoader.setController(newPuzzle);
@@ -139,6 +146,11 @@ public class GameController {
     //checks if a given puzzle can be swapped with an empty field
     //if so the field is swapped by the swap Puzzles method
     void checkIfSwapPossible(Puzzle p) {
+
+        if(!gameStarted){
+            gameStarted = true;
+            startTimer();
+        }
 
         if (p.row + 1 < gridSize && currentBoard[p.row + 1][p.col].image == null)
             swapPuzzles(p.row+1, p.col, p);
@@ -172,14 +184,13 @@ public class GameController {
     //checks if the game is won
     //if so an alert is shown
     void checkIfGameWon(){
-        boolean isWon = false;
         int winIndex = 0;
         for(int row = 0; row < gridSize; row++) {
             for (int col = 0; col < gridSize; col++) {
                 if(currentBoard[row][col].imgIndex == winIndex){
-                    isWon = true;
+                    gameWon = true;
                 }else{
-                    isWon = false;
+                    gameWon = false;
                     return;
                 }
                 winIndex++;
@@ -187,14 +198,21 @@ public class GameController {
         }
 
         //alert is shown when the game is won
-        if(isWon){
+        if(gameWon){
+
+            for(int row = 0; row <gridSize; row++){
+                for(int col = 0; col <gridSize; col++){
+                    currentBoard[row][col].setGameWonToTrue();
+                }
+            }
+
             ImageView winImage = new ImageView();
             winImage.setImage(new Image("file:"+ new File(
                     "/Users/cheap_ramen/Documents/college/Projekt_2_s18710/src/sample/cutImage/gameWonIMG.jpg")));
 
             Alert winAlert = new Alert(Alert.AlertType.INFORMATION);
             winAlert.setTitle("Win");
-            winAlert.setContentText("Congratulations Fella ~ the victory is Yours");
+            winAlert.setContentText("You solved the puzzle in "+timer.getText()+ "! Congratulation!");
             winAlert.setGraphic(winImage);
             winAlert.show();
 
@@ -206,7 +224,7 @@ public class GameController {
         }
     }
 
-    //resets the board upon clicking
+    //resets the board when clicked
     @FXML void resetBoard(){
         for(int row = 0; row < gridSize; row++){
             for(int col = 0; col < gridSize; col++){
@@ -218,6 +236,7 @@ public class GameController {
         }
     }
 
+    //switches view to puzzle selection menu
     @FXML void setGoToMenu(){
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PuzzleSelect.fxml"));
         fxmlLoader.setController(menuController);
@@ -227,5 +246,46 @@ public class GameController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    void startTimer(){
+        Task<Double> timerTask = new Task<Double>() {
+
+            double startTime = System.currentTimeMillis();
+            double currentTime;
+
+            @Override
+            protected Double call() throws Exception {
+                while(!gameWon){
+                    Thread.sleep(100);
+                   currentTime = System.currentTimeMillis() - startTime;
+                   updateMessage(timeToString(currentTime));
+                }
+                return currentTime;
+            }
+        };
+
+        Thread timerThread = new Thread(timerTask);
+        timerThread.setDaemon(true);
+        timerThread.start();
+        timer.textProperty().bind(timerTask.messageProperty());
+    }
+
+    String timeToString(double time){
+
+        int minutes, seconds, miliSeconds;
+
+        minutes = (int)(time / 60000);
+        seconds = (int)(time /1000 - minutes*60);
+        miliSeconds = (int)(time - minutes*60000)%100;
+
+        StringBuilder timerBuilder = new StringBuilder();
+
+        timerBuilder.append(minutes < 10 ? "0"+minutes+":" : minutes+":");
+        timerBuilder.append(seconds < 10 ? "0"+seconds+":" : seconds+":");
+        timerBuilder.append(miliSeconds < 10 ? "0"+miliSeconds : miliSeconds);
+
+        return timerBuilder.toString();
+
     }
 }
