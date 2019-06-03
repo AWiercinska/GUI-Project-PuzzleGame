@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -24,10 +25,16 @@
          </font>
       </Text>
       <ImageView fx:id="selectedImageDisplay" fitHeight="189.0" fitWidth="290.0" layoutX="148.0" layoutY="156.0">
-      </ImageView>
+         <image>
+            <Image url="@../otherFiles/defaultImage.jpg" />
+         </image></ImageView>
       <Button fx:id="getImageButton" layoutX="237.0" layoutY="352.0" mnemonicParsing="false" onAction="#pickImage" styleClass="Button" text="Change Image" />
-      <Button fx:id="initializeGame" layoutX="519.0" layoutY="322.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="55.0" styleClass="Button" stylesheets="@../Stylesheets/PuzzleMenusStyleSheet.css" text="➡︎" textFill="WHITE"
-              onAction="#setInitializeGame">
+      <Button fx:id="initializeGame" layoutX="519.0" layoutY="322.0" mnemonicParsing="false" onAction="#setInitializeGame" prefHeight="61.0" prefWidth="67.0" styleClass="Button" stylesheets="@../Stylesheets/PuzzleMenusStyleSheet.css" text="&gt;" textFill="WHITE">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Button>
+      <Button fx:id="openMainMenu" layoutX="14.0" layoutY="322.0" mnemonicParsing="false" onAction="#setOpenMainMenu" prefHeight="61.0" prefWidth="67.0" styleClass="Button" stylesheets="@../Stylesheets/PuzzleMenusStyleSheet.css" text="&lt;" textFill="WHITE">
          <font>
             <Font size="30.0" />
          </font>

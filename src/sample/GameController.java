@@ -80,7 +80,7 @@ public class GameController {
                 for (int x = xx; x <= (puzzleImg.getWidth() - puzzleImg.getWidth() / gridSize); x += puzzleImg.getWidth() / gridSize) {
                     ImageIO.write(
                             puzzleImg.getSubimage(x, y, puzzleImg.getWidth() / gridSize, puzzleImg.getHeight() / gridSize),
-                            "jpg", new File("/Users/cheap_ramen/Documents/college/Projekt_2_s18710/src/sample/cutImage/" +
+                            "jpg", new File("/Users/cheap_ramen/Documents/college/Projekt_2_s18710/src/sample/otherFiles/" +
                                     index++ + ".jpg"));
                     imagesIndexes.add(index-1);
                 }
@@ -115,7 +115,7 @@ public class GameController {
                 int randomIndex = (int)(Math.random() * imagesIndexes.size());
                 int index = imagesIndexes.get(randomIndex);
                 imagesIndexes.remove(randomIndex);
-                Image puzzleImage = new Image("file:"+ new File("/Users/cheap_ramen/Documents/college/Projekt_2_s18710/src/sample/cutImage/" +
+                Image puzzleImage = new Image("file:"+ new File("/Users/cheap_ramen/Documents/college/Projekt_2_s18710/src/sample/otherFiles/" +
                         index + ".jpg").getAbsolutePath(),puzzleGrid.getWidth()/gridSize,
                         puzzleGrid.getWidth()/gridSize,
                         false,true);
@@ -210,7 +210,7 @@ public class GameController {
 
             ImageView winImage = new ImageView();
             winImage.setImage(new Image("file:"+ new File(
-                    "/Users/cheap_ramen/Documents/college/Projekt_2_s18710/src/sample/cutImage/gameWonIMG.jpg")));
+                    "/Users/cheap_ramen/Documents/college/Projekt_2_s18710/src/sample/otherFiles/gameWonIMG.jpg")));
 
             Alert winAlert = new Alert(Alert.AlertType.INFORMATION);
             winAlert.setTitle("Win");
@@ -221,7 +221,7 @@ public class GameController {
             writeScoreToFile();
 
             for(int i = 0; i < gridSize*gridSize; i++){
-                File fileToDelete = new File("/Users/cheap_ramen/Documents/college/Projekt_2_s18710/src/sample/cutImage"
+                File fileToDelete = new File("/Users/cheap_ramen/Documents/college/Projekt_2_s18710/src/sample/otherFiles"
                 + i + ".jpg");
                 fileToDelete.delete();
             }
@@ -298,7 +298,7 @@ public class GameController {
     void writeScoreToFile(){
         try{
             File bestScoresFile = new File(
-                    "/Users/cheap_ramen/Documents/college/Projekt_2_s18710/src/sample/cutImage/solveTimes.txt"
+                    "/Users/cheap_ramen/Documents/college/Projekt_2_s18710/src/sample/otherFiles/solveTimes.txt"
             );
             bestScoresFile.createNewFile();
             FileWriter fw = new FileWriter(bestScoresFile, true);

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -9,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@../Stylesheets/PuzzleMenusStyleSheet.css" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button layoutX="506.0" layoutY="341.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="72.0" styleClass="Button" stylesheets="@../Stylesheets/PuzzleMenusStyleSheet.css" text="Menu">
+      <Button fx:id="mainMenu" layoutX="506.0" layoutY="341.0" mnemonicParsing="false" onAction="#setMainMenu" prefHeight="39.0" prefWidth="72.0" styleClass="Button" stylesheets="@../Stylesheets/PuzzleMenusStyleSheet.css" text="Menu">
          <font>
             <Font size="15.0" />
          </font>
@@ -53,5 +55,15 @@
             <Font size="26.0" />
          </font>
       </Text>
+      <ImageView fx:id="starsImgLeft" fitHeight="203.0" fitWidth="114.0" layoutX="14.0" layoutY="19.0" pickOnBounds="true">
+         <image>
+            <Image url="@../otherFiles/starsLeft.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="starsImgRight" fitHeight="203.0" fitWidth="114.0" layoutX="472.0" layoutY="20.0" pickOnBounds="true">
+         <image>
+            <Image url="@../otherFiles/startRight.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
