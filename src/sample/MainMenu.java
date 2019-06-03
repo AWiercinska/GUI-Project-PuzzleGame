@@ -15,13 +15,10 @@ public class MainMenu extends Application {
 
         MenuController controller = fxmlLoader.getController();
 
-        System.out.println(primaryStage.toString());
-
         primaryStage.setTitle(" Welcome to PuzzlePics");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.setResizable(false);
         primaryStage.show();
-        System.out.println(fxmlLoader);
         controller.setStage(primaryStage, fxmlLoader,root);
     }
 
