@@ -10,19 +10,17 @@ public class MainMenu extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxmlFiles/MainMenu.fxml"));
         Parent root = fxmlLoader.load();
 
         MenuController controller = fxmlLoader.getController();
 
-        System.out.println(primaryStage.toString());
-
-        primaryStage.setTitle(" Welcome to PuzzlePics");
+        primaryStage.setTitle("PuzzlePics");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.setResizable(false);
         primaryStage.show();
-        System.out.println(fxmlLoader);
         controller.setStage(primaryStage, fxmlLoader,root);
+
     }
 
 

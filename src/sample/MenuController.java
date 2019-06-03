@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -26,30 +27,30 @@ public class MenuController {
     BufferedImage imageToCut;
     int difficultyLevel;
 
+
+    @FXML public Button startGame;
+    @FXML public Button exitGame;
+    @FXML public Button viewScores;
+    @FXML public Button getImageButton;
+    @FXML public ImageView selectedImageDisplay= null;
+    @FXML public TextField difficultySetField;
+
     public MenuController(){
-        difficultyLevel = 0;
+        difficultyLevel = 2;
         imageToCut = null;
 
     }
 
-    @FXML public Button startGame;
-    @FXML public Button exitGame;
-    @FXML public Button getImageButton;
-    @FXML public ImageView selectedImageDisplay= null;
-    @FXML public TextField difficultySetField;
-    @FXML public Button initializeGame;
-
     //when the "Start game" button is clicked the window
     //is switched to the "PuzzleSelect" view
     @FXML
-    public void openSelection(){
+    public void openPuzzleSetUp(){
 
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("PuzzleSelect.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxmlFiles/PuzzleSetUpScreen.fxml"));
                 fxmlLoader.setController(this);
                 Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-                stage.setTitle("Select Puzzle");
+                stage.setTitle("PuzzlePics");
                 stage.setScene(scene);
                 stage.show();
             } catch (IOException x) {
@@ -84,16 +85,19 @@ public class MenuController {
         });
     }
 
+    //After the user has chosen the Image an difficulty
+    //the game is initialized. It opens in another Window
     @FXML
     public void setInitializeGame(){
         if(difficultyLevel != 0 && imageToCut != null) {
-            GameController gc = new GameController(imageToCut, difficultyLevel,root);
+            GameController gc = new GameController();
+            gc.setController(imageToCut,difficultyLevel, stage, this);
             try {
-                fxmlLoader = new FXMLLoader(getClass().getResource("PuzzleGameScreen.fxml"));
-                Parent newRoot = fxmlLoader.load();
-                Scene scene = new Scene(newRoot, 600, 400);
+                fxmlLoader = new FXMLLoader(getClass().getResource("fxmlFiles/PuzzleGameScreen.fxml"));
                 fxmlLoader.setController(gc);
+                Scene scene = new Scene(fxmlLoader.load(), 600, 400);
                 stage.setScene(scene);
+                gc.prepareBoard();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -107,6 +111,14 @@ public class MenuController {
     @FXML
     void difficultyValueSet(){
         difficultyLevel= Integer.parseInt(difficultySetField.getText());
+        if(difficultyLevel >=7){
+            Alert faultyDifficultyAlert = new Alert(Alert.AlertType.ERROR);
+            faultyDifficultyAlert.setTitle("Selected level is too high");
+            faultyDifficultyAlert.setContentText("Please enter a level between 2 and 6");
+            faultyDifficultyAlert.show();
+            difficultyLevel = 2;
+            return;
+        }
         System.out.println(difficultyLevel);
     }
 
@@ -118,8 +130,24 @@ public class MenuController {
         });
     }
 
+    @FXML
+    private void openViewScores(){
+        try {
+            scoresViewController scoresViewController = new scoresViewController();
+            fxmlLoader = new FXMLLoader(getClass().getResource("fxmlFiles/BestScoresScreen.fxml"));
+            fxmlLoader.setController(scoresViewController);
+            Scene scene = new Scene(fxmlLoader.load(), 600,400);
+            stage.setTitle("PuzzlePics");
+            stage.setScene(scene);
+            stage.show();
+            scoresViewController.setTextFields();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
     //sets the stage for controller
-    void setStage(Stage stage, FXMLLoader fxmlLoader, Parent root){
+    public void setStage(Stage stage, FXMLLoader fxmlLoader, Parent root){
         this.stage=stage;
         this.fxmlLoader = fxmlLoader;
         this.root = root;
