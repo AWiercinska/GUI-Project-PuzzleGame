@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,19 +11,19 @@ public class MainMenu extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
+        MenuController controller = new MenuController();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxmlFiles/MainMenu.fxml"));
+        fxmlLoader.setController(controller);
         Parent root = fxmlLoader.load();
 
-        MenuController controller = fxmlLoader.getController();
 
-        System.out.println(primaryStage.toString());
-
-        primaryStage.setTitle(" Welcome to PuzzlePics");
+        primaryStage.setTitle("PuzzlePics");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.setResizable(false);
         primaryStage.show();
-        System.out.println(fxmlLoader);
-        controller.setStage(primaryStage, fxmlLoader,root);
+        Timeline timeline = new Timeline();
+        controller.setStage(primaryStage, fxmlLoader,root,timeline);
+        controller.animatePuzzles();
     }
 
 
