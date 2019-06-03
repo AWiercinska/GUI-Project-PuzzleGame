@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -122,7 +123,7 @@ public class GameController {
                 if(imagesIndexes.size() == 0) puzzleImage = null;
                 Puzzle newPuzzle = new Puzzle(puzzleImage,col,row,puzzleWidth,index,this, gameWon);
 
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Puzzle.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxmlFiles/Puzzle.fxml"));
                 fxmlLoader.setController(newPuzzle);
 
                 try{
@@ -206,6 +207,7 @@ public class GameController {
                 }
             }
 
+
             ImageView winImage = new ImageView();
             winImage.setImage(new Image("file:"+ new File(
                     "/Users/cheap_ramen/Documents/college/Projekt_2_s18710/src/sample/cutImage/gameWonIMG.jpg")));
@@ -215,6 +217,8 @@ public class GameController {
             winAlert.setContentText("You solved the puzzle in "+timer.getText()+ "! Congratulation!");
             winAlert.setGraphic(winImage);
             winAlert.show();
+
+            writeScoreToFile();
 
             for(int i = 0; i < gridSize*gridSize; i++){
                 File fileToDelete = new File("/Users/cheap_ramen/Documents/college/Projekt_2_s18710/src/sample/cutImage"
@@ -238,7 +242,7 @@ public class GameController {
 
     //switches view to puzzle selection menu
     @FXML void setGoToMenu(){
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PuzzleSelect.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxmlFiles/PuzzleSetUpScreen.fxml"));
         fxmlLoader.setController(menuController);
         try {
             Scene scene = new Scene(fxmlLoader.load(),600,400);
@@ -248,6 +252,7 @@ public class GameController {
         }
     }
 
+    //starts the timer thread
     void startTimer(){
         Task<Double> timerTask = new Task<Double>() {
 
@@ -271,6 +276,7 @@ public class GameController {
         timer.textProperty().bind(timerTask.messageProperty());
     }
 
+    //converts miliseconds into text that will appear on a timer label
     String timeToString(double time){
 
         int minutes, seconds, miliSeconds;
@@ -286,6 +292,21 @@ public class GameController {
         timerBuilder.append(miliSeconds < 10 ? "0"+miliSeconds : miliSeconds);
 
         return timerBuilder.toString();
+
+    }
+
+    void writeScoreToFile(){
+        try{
+            File bestScoresFile = new File(
+                    "/Users/cheap_ramen/Documents/college/Projekt_2_s18710/src/sample/cutImage/solveTimes.txt"
+            );
+            bestScoresFile.createNewFile();
+            FileWriter fw = new FileWriter(bestScoresFile, true);
+            fw.write(timer.getText()+System.lineSeparator());
+            fw.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
 
     }
 }

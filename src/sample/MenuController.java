@@ -10,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -29,28 +28,29 @@ public class MenuController {
     int difficultyLevel;
 
 
-    //@FXML private Text title;
     @FXML public Button startGame;
     @FXML public Button exitGame;
+    @FXML public Button viewScores;
     @FXML public Button getImageButton;
     @FXML public ImageView selectedImageDisplay= null;
     @FXML public TextField difficultySetField;
 
     public MenuController(){
-        difficultyLevel = 0;
+        difficultyLevel = 2;
         imageToCut = null;
+
     }
 
     //when the "Start game" button is clicked the window
     //is switched to the "PuzzleSelect" view
     @FXML
-    public void openSelection(){
+    public void openPuzzleSetUp(){
 
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PuzzleSelect.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxmlFiles/PuzzleSetUpScreen.fxml"));
                 fxmlLoader.setController(this);
                 Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-                stage.setTitle("Select Puzzle");
+                stage.setTitle("PuzzlePics");
                 stage.setScene(scene);
                 stage.show();
             } catch (IOException x) {
@@ -93,7 +93,7 @@ public class MenuController {
             GameController gc = new GameController();
             gc.setController(imageToCut,difficultyLevel, stage, this);
             try {
-                fxmlLoader = new FXMLLoader(getClass().getResource("PuzzleGameScreen.fxml"));
+                fxmlLoader = new FXMLLoader(getClass().getResource("fxmlFiles/PuzzleGameScreen.fxml"));
                 fxmlLoader.setController(gc);
                 Scene scene = new Scene(fxmlLoader.load(), 600, 400);
                 stage.setScene(scene);
@@ -130,8 +130,24 @@ public class MenuController {
         });
     }
 
+    @FXML
+    private void openViewScores(){
+        try {
+            scoresViewController scoresViewController = new scoresViewController();
+            fxmlLoader = new FXMLLoader(getClass().getResource("fxmlFiles/BestScoresScreen.fxml"));
+            fxmlLoader.setController(scoresViewController);
+            Scene scene = new Scene(fxmlLoader.load(), 600,400);
+            stage.setTitle("PuzzlePics");
+            stage.setScene(scene);
+            stage.show();
+            scoresViewController.setTextFields();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
     //sets the stage for controller
-    void setStage(Stage stage, FXMLLoader fxmlLoader, Parent root){
+    public void setStage(Stage stage, FXMLLoader fxmlLoader, Parent root){
         this.stage=stage;
         this.fxmlLoader = fxmlLoader;
         this.root = root;

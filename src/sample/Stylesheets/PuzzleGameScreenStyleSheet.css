@@ -1,29 +1,29 @@
 .background{
-    -fx-background-color: linear-gradient(rgb(124, 0, 113), rgba(0, 0, 0, 0.99));;
+    -fx-background-color: linear-gradient(rgb(255, 157, 112), rgba(255, 111, 163, 0.99));;
     -fx-font-family: "Futura";
     -fx-border-width: 3;
 }
 
 .GridPane{
     -fx-border-width: 3;
-    -fx-border-color: #a60083;
+    -fx-border-color: #ff4d8d;
 }
 
 .ImageView{
     -fx-border-width: 1;
-    -fx-border-color: #a60083;
+    -fx-border-color: #ff4d8d;
 }
 
 .ImageView:hover{
     opacity: 0.75;
     -fx-border-radius: 5;
-    -fx-border-color: #a60083;
+    -fx-border-color: #ff4d8d;
 }
 
 .ImageView:pressed{
     opacity: 0.5;
     -fx-border-radius: 5;
-    -fx-border-color: #a60083;
+    -fx-border-color: #ff4d8d;
 }
 
 .TextField{
